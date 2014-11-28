@@ -1,0 +1,66 @@
+ivdr (0.3.3-13) precise; urgency=low
+
+  *  RENR -> MOVR
+
+ -- Frodo <frodo.vdr@gmx.net>  Sat, 07 Dec 2013 21:27:09 +0100
+
+ivdr (0.3.3-12) precise; urgency=low
+
+  *  bugfixes
+
+ -- Frodo <frodo.vdr@gmx.net>  Tue, 11 Jun 2013 13:14:22 +0200
+
+ivdr (0.3.3-10) precise; urgency=low
+
+  *  bugfixes
+     - resolution added
+     - rights for /srv/streams fixed
+     - change install scripts, now you can install lighttpd
+       parallel to apache2
+     - install scripts checking for used ports
+
+ -- Frodo <frodo.vdr@gmx.net>  Tue, 11 Jun 2013 11:12:47 +0200
+
+ivdr (0.3.3-7) precise; urgency=low
+
+  *  bugfixes
+
+ -- Frodo <frodo.vdr@gmx.net>  Tue, 04 Jun 2013 22:42:45 +0200
+
+ivdr (0.3.3-6) precise; urgency=low
+
+  *  unstable ivdr-lighttpd and ivdr-apache2 removed
+
+ -- Frodo <frodo.vdr@gmx.net>  Tue, 04 Jun 2013 21:50:07 +0200
+
+ivdr (0.3.3-5) precise; urgency=low
+
+  *  install_apache2.sh fixed 
+
+ -- Frodo <frodo.vdr@gmx.net>  Mon, 04 Jun 2013 14:25:15 +0200
+
+ivdr (0.3.3-4) precise; urgency=low
+
+  *  fixes for ivdr-lighttpd and ivdr-apache2
+
+ -- Frodo <frodo.vdr@gmx.net>  Mon, 04 Jun 2013 13:28:21 +0200
+
+ivdr (0.3.3-2) precise; urgency=low
+
+  * add package ivdr-lighttpd and ivdr-apache2
+
+ -- Frodo <frodo.vdr@gmx.net>  Mon, 03 Jun 2013 23:25:01 +0200
+
+ivdr (0.3.3-1) precise; urgency=low
+
+  * add install script for apache
+  * fixes on install scripts
+
+ -- Frodo <frodo.vdr@gmx.net>  Fri, 31 May 2013 14:19:17 +0200
+
+ivdr (0.3.3-0) precise; urgency=low
+
+  * init version
+
+ -- Frodo <frodo.vdr@gmx.net>  Fri, 31 May 2013 14:19:17 +0200
+

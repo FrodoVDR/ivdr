@@ -1,0 +1,35 @@
+Source: ivdr
+Section: misc
+Priority: extra
+Maintainer:  Frodo <frodo.vdr@gmx.net>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.2
+Homepage: http://i-vdr.de/
+
+Package: ivdr
+Architecture: all
+Depends:
+ ${misc:Depends},
+ ${perl:Depends},
+ libxml-simple-perl,
+ perl-modules, 
+ libhtml-parser-perl,
+ libwww-perl,
+ libx264-132,
+ segmenter,
+ libav-tools (>=4:0.8.6-1ubuntu0.12.04.1~ivdr),
+ ffmpeg (>=4:0.8.6-1ubuntu0.12.04.1~ivdr),
+ libavcodec53 (>=4:0.8.6-1ubuntu0.12.04.1~ivdr),
+ libavdevice53 (>=4:0.8.6-1ubuntu0.12.04.1~ivdr),
+ libavformat53 (>=4:0.8.6-1ubuntu0.12.04.1~ivdr),
+ libavutil51 (>=4:0.8.6-1ubuntu0.12.04.1~ivdr),
+ libpostproc52 (>=4:0.8.6-1ubuntu0.12.04.1~ivdr), 
+ libswscale2 (>=4:0.8.6-1ubuntu0.12.04.1~ivdr)
+Conflicts:
+ ivdr-apache2,
+ ivdr-lighttpd
+Replaces:
+ ivdr-apache2,
+ ivdr-lighttpd
+Description: iVDR is a free non-commercial remote frontend for the VideoDiscRecorder-Project by Klaus Schmidinger designed to run as Webapplication on mobile devices using the WebKit-Engine like the iPhone. iVDR is written for Linux running a Perl-interpreter and Webserver and is subject to the GNU General Public License. 
+

@@ -1,0 +1,19 @@
+ScriptAlias /ivdr /usr/lib/cgi-bin/ivdr/ivdr.pl
+<Directory /usr/lib/cgi-bin/ivdr>
+#AuthType Basic
+#AuthName "Enter password:"
+#AuthUserFile /etc/apache2/passwd/htpasswd
+#AuthGroupFile /dev/zero
+# or an existing user
+Require user ivdr
+# No password on localhost / local network
+Allow from 127.0.0.0/255.0.0.0 ::1/128
+# Adjust this line
+Allow from 0.0.0.0/255.0.0.0
+Satisfy Any
+</Directory>
+
+AddType application/x-mpegURL .m3u8
+AddType video/MP2T .ts
+
+

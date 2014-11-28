@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+grep ram /etc/rc.local >/dev/null 2>&1
+if [ $? -ne 0 ]
+then
+	sed -i /etc/rc.local -e 's/exit 0//g'
+	echo "mkdir /dev/shm/ram" >> /etc/rc.local
+	echo "chmod 777 /dev/shm/ram" >> /etc/rc.local
+	echo "exit 0" >> /etc/rc.local
+fi
+
+#DEBHELPER#

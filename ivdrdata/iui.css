@@ -1,0 +1,1005 @@
+/* iui.css (c) 2007 by iUI Project Members, see LICENSE.txt for license */
+
+/* 
+* { outline: 2px dotted red }
+* * { outline: 2px dotted green }
+* * * { outline: 2px dotted orange }
+* * * * { outline: 2px dotted blue }
+* * * * * { outline: 1px solid red }
+* * * * * * { outline: 1px solid green }
+* * * * * * * { outline: 1px solid orange }
+* * * * * * * * { outline: 1px solid blue }
+*/
+
+body {
+    margin: 0;
+	min-height: 440px;
+    font-family: Helvetica;
+    background: #FFFFFF;
+    color: #000000;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+}
+
+body > *:not(.toolbar) {
+    display: none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 45px;
+    width: 100%;
+    min-height: 100%;
+
+}
+
+/*body[orient="landscape"] > *:not(.toolbar) {
+    min-height: 268px;
+}*/
+
+body > *[selected="true"] {
+    display: block;
+}
+
+.row > a[selected] , .row > a :active {
+	background-color: #194fdb !important;
+    background-image: url(selection.png) !important;
+    background-repeat: no-repeat, repeat-x;
+/*    background-position: right center, left top;*/
+    color: #FFFFFF !important;
+}
+
+ul.iTab > li > a[selected], ul.iTab > li > a:active , ul.iTab > li > a[selected="progress"] {
+	background: rgba(0,32,128,0.30) !important;
+}
+
+/************************************************************************************************/
+
+body > .toolbar {
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-bottom: 1px solid #2d3642;
+    border-top: 1px solid #6d84a2;
+    padding: 10px 75px;
+    height: 45px;
+    background: url(toolbar.png) #6d84a2 repeat-x;
+	text-align:center;
+
+}
+
+.toolbar > h1 {
+    position: relative;
+/*    left: 50%;
+    width: 150px;
+*/
+    margin: 1px 0px;
+    height: 45px;
+    font-size: 18px;
+    
+    text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #FFFFFF;
+}
+
+.toolbar > div#dlg_wait {
+	display: none;
+	position:absolute;
+	padding:10px 10px 5px;
+	background-color:black;
+	z-index:3;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* .leftButton , als id ersetzen und als special an build ul senden */
+.button, .inlinebutton, .leftButton, .subWhiteButton, .subBlueButton, .subButton {
+    overflow: hidden;
+    top: 8px;
+    width: auto;
+    border-width: 0 5px;
+    height: 30px;
+    line-height: 30px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    padding: 0 3px;
+}
+.button {
+    position: absolute;
+    right: 6px;
+    top: -37px;
+	margin: 0;
+    -webkit-border-image: url(toolButton.png) 0 5 0 5;
+}
+.inlinebutton {
+	position: relative ;
+	display: inline-block;
+	margin: 0px 5px;
+    -webkit-border-image: url(btndlbg.png) 0 5 0 5;
+}
+.leftButton {
+    position: fixed;
+	left: 6px;
+    right: auto;
+    margin: 0;
+    -webkit-border-image: url(toolButton.png) 0 5 0 5;
+}
+
+.blueHeadButton {
+    -webkit-border-image: url(blueButton.png) 0 5 0 5;
+}
+.redHeadButton {
+    -webkit-border-image: url(button-red.png) 0 5 0 5;
+}
+.lightHeadButton {
+    -webkit-border-image: url(button-light.png) 0 5 0 5;
+}
+.lightlightbgButton {
+    color: #425F86;
+    text-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0;
+    -webkit-border-image: url(btnllbg.png) 0 5 0 5;
+}
+
+.subButton {
+    margin: 0;
+    border-width: 0 12px;
+    padding: 10px;
+    height: 40px;
+    line-height: 15px;
+    font-size: 18px;
+}
+.blueButton  {
+    -webkit-border-image: url(bottombarblue.png) 0 12 0 12;
+}
+.whiteButton {
+    -webkit-border-image: url(bottombargray.png) 0 12 0 12;
+}
+.redButton {
+    -webkit-border-image: url(bottombarredfire.png) 0 12 0 12;
+}
+.greenButton {
+    -webkit-border-image: url(bottombargreen.png) 0 12 0 12;
+}
+.yellowButton {
+    -webkit-border-image: url(bottombaryellow.png) 0 12 0 12;
+}
+
+ul.iTab{
+	position: absolute;
+	right:5px;
+	top: -38px;
+	margin:0;
+	border-width:3px 3px;
+	-webkit-border-image:url(toolButton.png) 3 4;
+	padding:0;
+	height:26px;
+	line-height:26px;
+	font-size:13px;
+	text-shadow:rgba(0, 0, 0, 0.6) 0px -1px 0;
+	color:#fff;
+	font-weight:bold
+	}
+ul.iTab > li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	margin-top: -2px;
+	float:left;
+	height: 30px;
+	border-left:solid 1px rgba(0,0,0,0.3);
+	}
+ul.iTab > li > a{
+/*	width:40px;*/
+	margin: 0px;
+	padding: 2px 10px;
+	line-height:26px;
+	height: 26px;
+	color:inherit;
+	text-decoration:none;
+	text-align:center;
+	display:block;
+	}
+a.iBigTab {
+	font-size: 30px;
+	font-weight: 900;
+	vertical-align:middle;
+}
+ul.iTab > li img{
+	margin: 1px;
+}
+ul.iTab > li:first-child {
+	border:none;
+	margin-left: -3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-bottom-left-radius:4px;
+	}
+ul.iTab > li:last-child {
+	-webkit-border-top-right-radius:4px;
+	-webkit-border-bottom-right-radius:4px;
+	}
+ul.iTab > li.act { 
+	background:rgba(0,32,128,0.30) top repeat-x
+	}
+	
+#scrollBar {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 15px;
+	height: 100%;
+}
+
+#scrollBarText {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	max-Width: 180px;
+	min-Width: 80px;
+	padding: 0px 3px;
+	background: rgba(0,0,0,0.2);
+	/*font-Size: 6px;*/
+	color: white;
+	/*display: none;*/
+	overflow: hidden;
+	text-Overflow: ellipsis;
+	white-Space: nowrap;
+	/*-webkit-transition-property: opacity;
+	-webkit-transition-duration: 1s;*/
+}
+
+#backButton {
+    top: 8px;
+	left: 4px;
+    right: auto;
+    padding: 0;
+    max-width: 55px;
+    border-width: 0 8px 0 14px;
+    -webkit-border-image: url(backButton.png) 0 8 0 14;
+}
+
+/* red green yellow bigblue button added by iVDR developer */
+/*
+.whiteButton,
+.grayButton,
+.redButton, 
+.greenButton,
+.yellowButton,
+.blueButton {
+    position: absolute;
+	display: block;
+    border-width: 0 12px;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: inherit;
+	width:30%;
+    color: #FFFFFF;
+}
+.whiteButton {
+    -webkit-border-image: url(bottombarwhite.png) 0 12 0 12;
+}
+.redButton {
+    -webkit-border-image: url(bottombarredfire.png) 0 12 0 12;
+}
+.greenButton {
+    -webkit-border-image: url(bottombargreen.png) 0 12 0 12;
+}
+.yellowButton {
+    -webkit-border-image: url(bottombaryellow.png) 0 12 0 12;
+}
+.blueButton {
+    -webkit-border-image: url(bottombarblue.png) 0 12 0 12;
+}
+
+.topleft { top:30%; left:5%; }
+.topright { top:30%; right:5%; }
+.bottomleft{ top:65%; left:5%; }
+.bottomright { top:65%; right:5%; }
+*/
+
+img.info {
+z-index:3; 
+position: absolute; 
+margin: 6px 8px 6px 8px
+}
+
+/************************************************************************************************/
+
+
+body > ul {
+}
+
+
+body > ul > li {
+    position: relative;
+    margin: 0;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 8px 0 8px 10px;
+    font-size: 20px;
+    list-style: none;
+}
+
+body > ul.buttons {
+    background-color: #a7abb3;
+}
+body > ul.buttons > li:not(.bar):not(.group) {
+    position: relative;
+    margin: 1px 1px 0 0;
+	width: 75px;
+	height: 50px;
+    padding:0;
+    font-size: 24px;
+	text-shadow:#FFFFFF 1px 1px 2px; 
+	float: left;
+	text-align: center;
+	-webkit-border-radius:2px;
+    background-color: #dedee1;
+    border-bottom: 2px solid #dedee1;
+    border-left: 2px solid #dedee1;
+    border-right: 2px solid #f2f2f3;
+    border-top: 2px solid #f2f2f3;
+}
+/*body > ul.buttons > li.darker {
+	background-color: #b0bccd;
+    border-bottom: 2px solid #b0bccd;
+    border-left: 2px solid #b0bccd;
+    border-right: 2px solid #cdd5df;
+    border-top: 2px solid #cdd5df;
+}*/
+body > ul.buttons > li > a:not(.inlinebutton) {
+    font-size: 24px;
+    display: block;
+    margin: 0;
+    padding: 0;
+	text-decoration: none;
+    color: inherit;
+	font-weight: bold;
+    background: none;
+	list-style: none;
+	height:50px;
+}
+body > ul.buttons > li  h1 { 
+	font-size: 13px;
+    display: block;
+	margin: 0 4px 0px;
+	color: #324F85;
+	overflow: hidden;
+}
+body > ul.buttons > li  h2 { 
+	font-size: 12px;
+    display: block;
+	margin: 4px 6px 8px;
+	color: #324F85;
+	overflow: hidden;
+	white-space:normal;
+	height:50px;
+}
+body > ul.buttons > li  h3 { 
+	position:absolute;
+	font-size: 11px;
+    display: block;
+	margin: 0px 1px;
+	right:0;
+	bottom:0;
+	color: #324F85;
+	overflow: hidden;
+}
+
+
+body > ul > li.group {
+    position: relative;
+    top: -1px;
+    margin-bottom: -2px;
+    border-top: 1px solid #7d7d7d;
+    border-bottom: 1px solid #999999;
+    padding: 0px 10px;
+    background: url(listGroup.png) repeat-x;
+    font-size: 16px;
+	line-height: 20px;
+    font-weight: bold;
+    text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
+    color: #FFFFFF;
+    height: 20px;
+    white-space: nowrap;
+
+}
+body > ul > li.group:first-child {
+    top: 0;
+    border-top: none;
+}
+body > ul > li.bar {
+    position: relative;
+    /*top: -1px;*/
+    margin-bottom: -2px;
+    border-bottom: 1px solid #999999;
+    background: url(bar.png) #7388a5 repeat-x;
+	padding: 0px 10px;
+/*	background-color: #C5CCD4;*/
+    min-height: none;
+    white-space: nowrap;
+	height: 43px;
+	text-align: center;
+	width:auto;
+	}
+
+body > ul > li > a {
+    display: block;
+    margin: -8px 0 -8px -10px;
+    padding: 8px 32px 8px 10px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    background: url(listArrow.png) no-repeat right center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+/*    white-space:nowrap;*/
+	
+}
+body > ul > li > a.img{
+margin-left: 30px;
+line-height: 30px;
+}
+.inlineleft { 
+float:left; 
+margin: -3px 0px 0px -3px; 
+}
+
+/*body > ul > li > font */
+
+.topfont {
+	font-weight: normal;
+	font-size: 14px;
+	color: #6495ED; 
+}
+.mainfont {
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+}
+.objfont {
+	font-weight: normal;
+	font-size: 14px;
+	color: #000000;
+}
+.smallfont {
+	font-weight: normal;
+	font-size: 12px;
+	color: #000000;
+	vertical-align: middle;
+}
+.subfont {
+	font-weight: normal ;
+	font-size: 14px;
+	color: #999999
+}
+.minifont  {
+	font-weight: normal;
+	font-size: 11px;
+	color: #4d4d70;
+	font-weight:bold;
+}
+.grayed {
+	color: #999999;
+	font-style:oblique	
+}
+.warn {
+	color: #CC0000;
+	font-weight:bold	
+}
+.footerfont {
+	text-shadow: rgba(255, 255, 255, 0.75) 0 1px 0;
+	color: #666666;
+	font-weight:bolder;
+	font-size:12px
+}
+.csub {
+	color: #999999;
+}
+.cdark {
+	color: #666666;
+}
+.wrap {
+    white-space:normal !important;
+}
+.lesssize {
+	margin-left:1em;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+.nosize {
+	display:block;
+	line-height:1em;
+	margin-top: -1em;
+	margin-left: 1em;
+	text-overflow: ellipsis;
+}
+.minsize {
+	line-height: 30px;
+}
+.roundmark { padding:1px 6px; background-color: #8B98B3; border-radius: 15px; color:#FFFFFF; font-size:16px; text-align:right;}
+
+.listarrow { background: url(listArrow.png) no-repeat right center; }
+.play { background: url(bullet-media.png) no-repeat right center; }
+.playbtn { background: url(playbtn.jpg) no-repeat center; }
+.new { background: url(next.png) no-repeat right center; }
+.newicon { background: url(new.png) no-repeat right center; }
+.cancel { background: url(cancel.png) no-repeat right center;}
+.attention { background: url(attention.png) no-repeat right center; }
+.rec { background: url(rec.png) no-repeat right center; }
+.recdeact { background: url(recdeact.png) no-repeat right center; }
+.checked { color: #324F85 !important; background: url(check.png) no-repeat right center; }
+.folder { background: url(folder.png) no-repeat right center; }
+.remove { background: url(remove.png) no-repeat right center; }
+.add { background: url(add.png) no-repeat right center; }
+
+.ratestar { background: url(whitestar.png) no-repeat center center; }
+.ratedot { background: url(whitedot.png) no-repeat center center; }
+
+.star0 { background: url(star0.png) no-repeat right bottom;}
+.star1 { background: url(star1.png) no-repeat right bottom;}
+.star2 { background: url(star2.png) no-repeat right bottom;}
+.star3 { background: url(star3.png) no-repeat right bottom;}
+.star4 { background: url(star4.png) no-repeat right bottom;}
+.star5 { background: url(star5.png) no-repeat right bottom;}
+
+td.recorddir {
+	max-width:1px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap;'
+}
+.more { background:  url(More.png) no-repeat right bottom; }
+.cuticon { background:  url(cut.png) no-repeat right center; }
+.none { background: no-repeat right center; }
+
+a[target="_replace"], a.small[target="_replace"] {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding-top: 25px;
+	text-align:center;
+    padding-bottom: 25px;
+    font-size: 18px;
+    color: #6495ED;
+    background-color: #FFFFFF;
+    background-image: none;
+}
+a.small[target="_replace"] {
+	padding-top: 3px !important;
+	padding-bottom:3px !important;
+}
+/************************************************************************************************/
+    
+body > .dialog {
+    z-index: 2;
+    padding: 0px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	min-height: 268px;
+}
+
+/*
+body > .subdialog, body[orient="landscape"] > .subdialog {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-webkit-border-radius: 30px;
+	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+	width:85%;
+	min-height: 0px;
+	height:100px;
+}
+
+.subdialog > fieldset {
+	text-align:center;
+	background: none;
+	border-top:none;
+}
+*/
+.dialog fieldset { 
+	/*Dialog Title*/
+    margin: 0;
+	display:block;
+	padding: 0px 65px;
+    border: none;
+	height: 43px;
+    border-top: 1px solid #6d84a2;
+    background: url(toolbar.png) #7388a5 repeat-x;
+    text-align: center;
+}
+
+.dialog fieldset > h1 {
+	margin:0px;
+	line-height:43px;
+    font-size: 18px;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dialog fieldset > label {
+    position: absolute;
+    margin: 16px 0 0 6px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.dialog div#rateStars > span  {
+	position: relative;
+	display:inline-block;
+	height: 24px;
+	width: 30px;
+}
+
+.dialogbutton {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+	width: 22%;
+	min-width:72px;
+	height: 96px;
+	margin: 10px 4px;
+	float:left;
+	text-shadow:black 2px -1px 2px;
+	color:#EEEEEE;
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+	text-decoration:none;
+	line-height:20px;
+	z-index: 3;
+}
+.dialogbutton > img {
+	width: 72px;
+	height: 72px;
+}
+
+
+
+#keyBar {
+	position: fixed;
+	/*background-color:blue;*/
+	top: 0px;
+	left: 0px;
+	width: 10px;
+	height:100%;
+	z-index:3;
+
+}
+/*
+form#keysform span.key {
+	color:#324F85;
+	border: solid 2px gray;
+    border-bottom: 2px solid #b0bccd;
+    border-left: 2px solid #b0bccd;
+    border-right: 2px solid #cdd5df;
+    border-top: 2px solid #cdd5df;
+	background:url(buttonoverlay.png) no-repeat center #b0bccd;
+	text-align:center;
+form#keysform span.vol{
+	position: absolute;
+	left: 50px;
+	top: 150px;
+	border: solid 2px gray;
+	background-color: darkgray; 
+	text-align:center;
+	-webkit-border-radius: 14px;
+	display: block;
+	height:100px;
+	width:150px;
+	line-height: 100px;
+	font-size: 48px;
+	font-weight: bold;
+}
+form#keysform span.text {
+	font-size: 18px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+    white-space:nowrap; 
+}
+form#keysform span.letter {
+	font-size: 32px;
+	font-weight: bold;
+}
+form#keysform span.sign {
+	font-size: 32px;
+	font-weight: bold;
+}
+form#keysform span.multisign {
+	font-size: 32px;
+	font-weight: bold;
+	letter-spacing: -0.3em;
+}
+.volbutton {
+        display: block;
+        width:200px;
+        height:200px;
+		background-color: blue;
+		background: url(logo.png) center center no-repeat;
+}
+.redcircle {
+	background-color: none; 
+    background-image: -webkit-gradient(radial, 34 34, 14, 34 34, 16, from(red), to(rgba(0,0,0,0)));
+}
+*/
+
+input {
+    box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	width: 100%;
+    margin: 8px 0 0 0;
+    padding: 6px 6px 6px 44px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/************************************************************************************************/
+
+body > .panel {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 10px;
+    background: #c8c8c8 url(pinstripes.png);
+	min-height: 400px;
+}
+
+.panel > fieldset {
+    position: relative;
+    margin: 0 0 20px 0;
+    padding: 0;
+    background: #FFFFFF;
+    -webkit-border-radius: 10px;
+    border: 1px solid #999999;
+    font-size: 16px;
+	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.row  {
+    position: relative;
+    min-height: 42px;
+    border-bottom: 1px solid #999999;
+    -webkit-border-radius: 0;
+	text-align: right;
+}
+
+.text  {
+    position: relative;
+    min-height: 42px;
+    border-bottom: 1px solid #999999;
+    -webkit-border-radius: 0;
+	padding: 14px;
+}
+
+fieldset > .row:last-child {
+    border-bottom: none !important;
+}
+
+.row > label {
+    position: absolute;
+	margin: 0 0 0 14px;
+	padding-right: 16px;
+    left: 0px;
+	height: 42px;
+	line-height:42px;
+    font-weight: bold;
+}
+
+.row > a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+	text-align: left;
+	padding: 0 0 0 14px;
+	line-height: 42px;
+    font-weight: bold;
+}
+ 
+.row > input {
+	position: relative;
+	margin: 0;
+    border:none;
+    padding: 0px 14px 0px 14px;
+    height: 42px;
+    background: none;
+	text-align: right;
+}
+
+.row > select, .dialog select {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    position: relative;
+    border: none;
+    margin: 3px 6px;
+    padding: 0 8px 0 8px;
+    line-height:36px;
+	font-size:16px;
+    background: url(More.png) #EEEEEE no-repeat right bottom; 
+	min-width: 200px;
+}
+.dialog select {
+    position: absolute;
+	left: 103px;
+}
+
+.row > select.small {
+/*position:relative;*/
+min-width: 0px;
+width:65px;
+background:url(modal.png) no-repeat right bottom;
+background-color:#EEEEEE;
+font-size:20px;
+}
+.row > .toggle {
+    position: absolute;
+    top: 8px;
+    right: 6px;
+    width: 90px;
+    height: 25px;
+}
+
+.toggle {
+    border: 1px solid #888888;
+    -webkit-border-radius: 6px;
+    background: #FFFFFF url(toggle.gif) repeat-x;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.toggle[toggled="true"] {
+    border: 1px solid #143fae;
+    background: #194fdb url(toggleOn.gif) repeat-x;
+}
+
+.toggleOn {
+    display: none;
+    position: absolute;
+    width: 50px;
+    text-align: center;
+    left: 0;
+    top: 0;
+    color: #FFFFFF;
+    text-shadow: rgba(0, 0, 0, 0.4) 0px -1px 0;
+}
+
+.toggleOff {
+    position: absolute;
+    width: 50px;
+    text-align: center;
+    right: 0;
+    top: 0;
+    color: #666666;
+}
+
+.toggle[toggled="true"] > .toggleOn {
+    display: block;
+}
+
+.toggle[toggled="true"] > .toggleOff {
+    display: none;
+}
+
+.thumb {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 40px;
+    height: 25px;    
+    border: 1px solid #888888;
+    -webkit-border-radius: 6px;
+    background: #ffffff url(thumb.png) repeat-x;
+}
+
+.toggle[toggled="true"] > .thumb {
+    left: auto;
+    right: -1px;
+}
+
+.panel > h2 {
+    margin: 0 0 8px 14px;
+    font-size: inherit;
+    font-weight: bold;
+    color: #4d4d70;
+    text-shadow: rgba(255, 255, 255, 0.75) 0 1px 0;
+}
+.panel > h2 > img {
+margin:-8px 10px 0px 0px;
+position:absolute;
+}
+/* Stream Timestampbar*/
+#pin {
+position: absolute;
+height: 50px;
+width: 30px;
+bottom:16px;
+/*left: -25px;*/
+left: -15px;
+border-width: 0;
+padding: 0;
+margin: 0;
+background-image: url(downbtn.png);
+background-repeat: no-repeat;
+background-position: center;
+color:white;
+font-size: 12px;
+}
+#timebarlabel {
+position: absolute;
+left: 16px;
+line-height: 30px;
+font-weight: normal;
+font-size: 12px;
+color: #4d4d70;
+text-shadow: rgba(255, 255, 255, 0.75) 1px 1px 1px;
+}
+/*#pin:active {
+background-image: url(/iVDR/PinGreen.png);
+}*/
+#timebar {
+border:1px solid #CFCFCF;
+border-radius: 2px;
+height: 30px;
+width: 100%;
+margin-top: 30px;
+background-color: #6495ED;
+background: url(barwhite.png);
+-webkit-box-shadow: 0px -1px 1px rgba(200, 200, 200, 0.8);
+}
+#timebar td.yellow {
+background: url(barorange.png);
+}
+#timebar td {
+	white-space:nowrap;
+	overflow:visible ;
+}
+
+/************************************************************************************************/
+
+table.info {
+	table-layout:fixed;
+	border:1px solid #EEEEEE;
+	-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+	border-spacing:0px;
+	background:#EEEEEE;
+	padding: 4px;
+	margin-left: 8px;
+	width: 96%;
+}
+
+.fade {
+/*	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 0.4s;*/
+}
+
+.hideoverflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space:nowrap;
+}
+
+#preloader {
+    display: none;
+    background-image: url(selection.png),
+        url(blueButton.png), url(listArrowSel.png), url(listGroup.png),
+		url(toggle.gif), url(toggleOn.gif), url(buttonoverlay.png);
+}

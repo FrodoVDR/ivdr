@@ -1,0 +1,47 @@
+#! /bin/sh
+
+set -e
+
+prevver="$2"
+
+add_ivdr_user() {
+        if ! getent passwd www-data >/dev/null; then
+                adduser --group --system --home /var/www --shell /bin/sh www-data
+        fi
+        # workaround bug (#531021) in xen-tools
+        if ! getent group www-data >/dev/null; then
+                addgroup --system www-data
+                adduser --shell /bin/sh www-data
+        fi
+}
+
+initperms() {
+        chown -R www-data:www-data /var/www/ivdrdata/
+	touch /usr/lib/cgi-bin/ivdr/markedfiles.log
+	chmod 666 /usr/lib/cgi-bin/ivdr/markedfiles.log
+	chown www-data:www-data /usr/lib/cgi-bin/ivdr/markedfiles.log
+	chmod 666 /usr/lib/cgi-bin/ivdr/components/ivdr.db
+	chown www-data:www-data /usr/lib/cgi-bin/ivdr/components/ivdr.db
+	chmod 777 /dev/shm/ram
+	chown www-data:www-data /srv/streams
+	chmod 775 /srv/streams
+}
+
+
+
+case "$1" in
+        configure)
+                add_ivdr_user
+                initperms
+                ;;
+        abort-upgrade|abort-deconfigure|abort-remove)
+                :
+                ;;
+        *)
+                echo "Called with unknown argument $1, bailing out."
+                exit 1
+                ;;
+esac
+
+#DEBHELPER#
+

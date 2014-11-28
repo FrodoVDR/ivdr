@@ -1,0 +1,5 @@
+cgi-bin/components/ivdr.db      usr/lib/cgi-bin/ivdr/components/
+cgi-bin/*			usr/lib/cgi-bin/ivdr/
+ivdrdata/*			var/www/ivdrdata/
+cgi-bin/ivdr.pl			usr/lib/cgi-bin/ivdr/
+contrib/*			usr/share/ivdr/

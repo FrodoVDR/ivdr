@@ -1,0 +1,784 @@
+<?xml version="1.0"?>
+<db>
+<config> <!-- Beschreibt die Konfiguration -->
+ <!-- Eigenschaften:
+ *optional
+ var -> Beschreibt die Variable und das zugehorige Eingabefeld
+  Eigenschaften:
+  name		-> eindeutiger Name
+  title		-> Kurzname
+  *descr	-> Beschreibung
+  *defalut	-> Enthaelt standard-wert, bei required wird zuerst hier geschaut, (n.a.)->bei Liste name des values (momentan erstes value standard) 
+  *type		-> 0 Textfeld, 1 Zahlenfeld, 2 Boolean, 3 Auswahlliste
+	bei 3 verweist setname auf ein set
+  *required	-> 0 optional, 1 mussfeld: wenn default vorhanden wird default gewählt, "name" Nur wenn variable name vorhanden notwendig
+  *is		-> schaut ob datei, oder verzeichnis der dateioperation entspricht
+  *switch	-> (n.a.) wenn type 0, 1 oder 3 leer, oder type 2 off. enthält namen der felder die eingeblendet werden sollen 
+ group	  -> enthaelt var's die gruppiert werden ( name, title, *descr, multiple )
+ element  -> umschliesst group und var um sortierung zu gewährleisten
+ category -> enthaelt element (name, title, (n.a.)->*descr)
+
+ set	-> definiert die verschiedenen const-sets (name, title, item)
+ item	-> value, text, descr(n.a.)
+ 
+  <element> <var> <name></name>
+    <title></title>
+    <descr></descr>
+    <type></type>
+    <default></default>
+   </var>
+  </element>
+
+weitere parameter:
+<attrib> (value, text) bei der required abfrage zum abfragen von dateiattributoperatoren (-r read, -w, -x, -e, -z, !-s, -f, -d, !-l) 
+<regexp> (value, text) überprüft den inhalt auf den angegeben regexp.
+
+1. require = nicht null
+2. attrib = entspricht dateiattributsoperator
+3. regexp = entspricht regulärem ausdruck
+
+NEW:
+
+TODO weitere Einstellungen:
+medienplayeradress
+use medienplayer for vdr medien
+
+ -->
+ 
+ <category> <name>mainsettings</name>
+ <title><de>Grundeinstellungen</de><en>Mainsettings</en></title>
+  <element> <var> <name>configname</name>
+    <title>Name</title>
+    <descr>
+		<de>Name der Einstellungszusammentstellung</de>
+		<en>Name of Configurationset</en>
+	</descr>
+	<required>1</required>
+   </var>
+  </element>
+
+<!--  <element> <var> <name>atprocess</name>
+    <title>at</title>
+    <descr>Standort des Programmes \"at\"\n/usr/bin/at\nFür Streaming und Umschalttimer benötigt.</descr>
+    <default>/usr/bin/at</default>
+    <attrib><value>x</value><text>ATTENTION: at does not exist or is not executable!</text></attrib>	
+   </var>
+  </element>
+-->
+  <element> <var> <name>player</name> <!-- neu -->
+    <title><de>Medienplayer</de><en>Mediaplayer</en></title>
+    <descr>
+		<de>Welchen Medienplayer verwenden Sie?</de>
+		<en>Welchen Medienplayer verwenden Sie?</en>
+	</descr>
+    <type>3</type>
+    <setname>player</setname>
+	<switch>1</switch>
+   </var>
+  </element>
+  
+  <element> <var> <name>player_adress</name> <!-- neu -->
+    <title><de>Playeradresse</de><en>Playeradresse</en></title>
+	<descr><de>Adressierung des Medienplayer.\nNur nötig bei nicht VDR-Player.\nLeer für automatisch.</de><en>Localize the Mediaplayer.\nOnly for non VDR-Player.\nEmpty for automaticly.</en></descr>
+   </var>
+  </element>
+  
+<!--  <element> <var> <name>player_vdr</name>
+    <title><de>VDR über Player?</de><en>VDR over Player?</en></title>
+    <descr><de>Spiele VDR Medien (Livestream und Aufnahmen) über Medienplayer. Nein für </de><en></en></descr>
+   </var>
+  </element>
+-->
+  <element> <var> <name>mediathek</name> <!-- neu -->
+    <title>Mediathek (beta)</title>
+	<descr>
+		<de>Mediathek aktivieren?\nDie Mediathek wird verwendet um große Musiksammlungen zu handhaben!\nDie verwendeten Verzeichnisse werden im Bereich Musik definiert. Die Datenbank wird mit dem Befehl mdb.pl erstellt. mdb.pl --help für ausführliche Informationen.</de>
+		<en>Activate Mediathek?\nThe Mediathek is used to handle big musiccollection!\nThe musicdirectories are defined in the musicsection. The database can be created with the programm mdb.pl. See mdb.pl --help for more information!</en>
+	</descr>
+    <type>2</type>
+   </var>
+  </element>
+
+  <element> <group> <name>ivdrmenu</name>
+    <title><de>Menüeinstellungen</de><en>Menusettings</en></title>
+    <element> <var> <name>language</name> <!-- neu -->
+      <title><de>Sprache</de><en>Language</en></title>
+      <default>en</default>
+      <type>3</type>
+      <setname>language</setname>
+     </var>
+    </element>
+    <element> <var> <name>timeformat</name> <!-- neu -->
+      <title><de>Zeitformat</de><en>Time format</en></title>
+      <default>24</default>
+      <type>3</type>
+      <setname>timeformat</setname>
+     </var>
+    </element>
+    <element> <var> <name>slide</name>
+      <title><de>Scrolleffekt</de><en>Scrolleffect</en></title>
+      <descr>
+		<de>Weicher Scrolleffekt innerhalb des iVDR-Menüs.</de>
+		<en>Smooth Scrolleffect for the iVDR-Menu.</en>
+	  </descr>
+      <type>2</type>
+     </var>
+    </element>
+   </group>
+  </element>
+  <element> <group> <name>special_links</name> <multiple>1</multiple>
+    <title><de>Benutzerdefinierte Hyperlinks / Plugins</de><en>User defined hyperlinks / Plugins</en></title>
+	<descr>
+		<de>Die links werden im Hauptmenu angezeigt.</de>
+		<en>This links will be shown in the mainmenu.</en>
+	</descr>
+    <element> <var> <name>special_links_name</name>
+      <title>Name</title>
+     </var>
+    </element>
+    <element> <var> <name>special_links_link</name>
+      <title>Link</title>
+     </var>
+    </element>
+    <element> <var> <name>special_links_target</name>
+      <title>Target</title>
+      <type>3</type>
+      <setname>targets</setname>
+     </var>
+    </element>
+	</group>
+  </element>
+
+  <element> <group> <name>charset</name>
+    <title><de>Zeichensatzeinstellungen</de><en>Character set configration</en></title>
+	 <element> <var> <name>charset</name>
+       <title><de>Zeichensatz</de><en>Character set</en></title>
+       <descr>
+       	<de>Im System verwendeter Zeichensatz. (siehe locale)\nBsp.: UTF-8, ISO-8859-1</de>
+	<en>System character set. (see locale)\nExample: UTF-8, ISO-8859-1</en>
+       </descr>
+       <default>utf-8</default>
+       <required>1</required>
+      </var>
+	 </element>
+	 <element> <var> <name>binmodetoutf8</name>
+       <title>UTF8</title>
+       <type>2</type>
+	   <default>1</default>
+      </var>
+	 </element>
+   </group>
+  </element>
+  
+ </category>
+ 
+ <category> <name>vdr</name>
+ <title><de>VDR Einstellungen</de><en>VDR Settings</en></title>
+  <element> <var> <name>vdr</name> <!-- neu -->
+    <title><de>Aktiviert?</de><en>Enabled?</en></title>
+    <type>2</type>
+    <default>1</default>
+   </var>
+  </element>
+  <element> <var> <name>vdr_adress</name>
+    <title><de>Adresse</de><en>Location</en></title>
+    <descr><de>Hostname oder IP-Adresse.\nStandardwert: localhost</de><en>Hostname or IP-adress.\nDefault: localhost</en></descr>
+    <default>localhost</default>
+    <required>1</required>
+   </var>
+  </element>
+  <element> <var> <name>vdr_port</name>
+    <title>SVDRP-Port</title>
+    <default>2001</default>
+    <type>1</type>
+    <required>1</required>
+   </var>
+  </element>
+  <element> <var> <name>vdr_mpplay</name>
+    <title><de>Wiederg. am Medienplayer</de><en>Playback at Mediaplayer</en></title>
+    <descr>
+		<de>Wiedergabe von TV und Aufnahmen über gewählten Medienplayer?\nStandard NEIN. (Wiedergabe am VDR)\nNur möglich wenn Medienplayer nicht innerhalb des VDR ist.</de>
+		<en>TV and recording playback via selected Mediaplayer?\nDefault NO. (Playback at VDR)\nOnly possible if media player is not within VDR.</en>
+	</descr>
+    <type>2</type>
+   </var>
+  </element>
+  <element> <var> <name>vdr_streamdev</name>
+    <title>Live-Stream</title>
+	<descr>
+		<de>Für den externen oder internen Streamdev Livestream zugriff.\nz.B.: http://vdr:3000/TS/\nLeer für automatisch.</de>
+		<en>For internal or external Streamdev livestream access.\nExample: http://vdr:3000/TS/\nEmpty for automaticly.</en>
+	</descr>
+	</var>
+  </element>
+  <element> <var> <name>channels</name>
+    <title>channels.conf</title>
+    <descr><de>Pfad zur channels.conf.\nWenn nicht angegeben, werden Kanäle über SVDRP geholt.</de><en>Path to channels.conf\nIf empty, Channels will be get by SVDRP.</en></descr>
+    <default>/var/lib/vdr/channels.conf</default>
+    <switch>1</switch>
+    <attrib><value>r</value><text>File does not exist or is not readable!</text></attrib>	
+   </var>
+  </element>
+  <element> <var> <name>maxchannels</name>
+    <title><de>Max. Kanalnr.</de><en>Max. Channelno.</en></title>
+    <descr><de>Letzte verwendete Kanalnummer.\nKanalbegrenzung zur Steigerung der Geschwindigkeit von iVDR. 0 = AUS.</de><en>Last used Channelnumber.\nMinimize channels to increase in efficiency of iVDR. 0 = OFF</en></descr>
+    <type>1</type>
+    <default>499</default>
+	<switch>1</switch> <!-- könnte über null geregelt werden -->
+   </var>
+  </element>
+  <element> <var> <name>usecategory</name>
+    <title><de>Kanalkategorien</de><en>Channelgroups</en></title>
+    <descr><de>Verwende Kanalgruppen in iVDR. Nur bei angegebener channels.conf verfügbar.</de><en>Use Channelgroups in iVDR. Only availible with pointed channels.conf.</en></descr>
+    <default>1</default>
+	<type>2</type>
+   </var>
+  </element>
+  <element> <var> <name>videodir</name>
+    <title><de>Aufzeichnungen</de><en>Recordings</en></title>
+    <descr><de>Pfad der VDR-Aufnahmen</de><en>Path of the VDR-recordings</en></descr>
+    <default>/var/lib/video</default>
+    <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+   </var>
+  </element>
+  <element> <var> <name>fps</name>
+    <title>FPS</title>
+    <descr><de>(Frames per second). 25 oder 29.997\nZur Ermittlung der Aufzeichnungslängen.</de><en>(Frames per second). 25 or 29.997\nFor calculating the recordinglength.</en></descr>
+    <type>3</type>
+	<setname>fps</setname>
+    <default>25</default>
+   </var>
+  </element>
+  <element> <var> <name>chaimages</name>
+    <title><de>Kanallogos</de><en>Channellogos</en></title>
+    <descr><de>Pfad der Kanallogobilder.</de><en>Path of the Channellogoimages.</en></descr>
+    <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+	<switch>1</switch>
+	</var>
+  </element>
+  <element> <var> <name>epgimages</name>
+    <title><de>EPG-Bilder</de><en>EPG-pictures</en></title>
+    <descr><de>Pfad der EPG-Bilder, wenn vorhanden.</de><en>Location of EPG-pictures if availible.</en></descr>
+    <default>/var/lib/vdr/epgimages</default>
+    <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+	<switch>1</switch>
+	</var>
+  </element>
+  <element> <var> <name>panic_script</name>
+    <title><de>Panikbefehl</de><en>Panic command</en></title>
+    <descr><de>Dieser Befehl kann ausgeführt werden, wenn der VDR-Server nicht erreichbar ist.\nBsp: wakeonlan, reboot, restar usw.</de><en>This command can be executed, if the VDR-server is not reachable.\nExample: wakeonlan, reboot, restart aso.</en></descr>
+   </var>
+  </element>
+  <element> <group> <name>timerset</name>
+    <title>Timer / epgSearch</title>
+	<element> <var> <name>pre_switch_time</name>
+	  <title><de>Umschalttimer</de><en>Switchtimer</en></title>
+	  <descr><de>Vorlauf des automatischen Umschalttimers in sekunden.</de><en>Forerun of automaticly switchtimer in seconds.</en></descr>
+	  <type>1</type>
+	  <default>30</default>
+	  </var>
+	</element>
+	<element> <var> <name>fav_hours</name>
+	  <title><de>Fav. Zeit</de><en>Fav. time</en></title>
+	  <descr><de>Zeitraum der EPG-Search favoriten.</de><en>Time period to show EPG-Search favorites.</en></descr>
+	  <type>1</type>
+	  <default>48</default>
+	  </var>
+	</element>
+	<element> <var> <name>pretime</name>
+	  <title><de>Vorlauf</de><en>Forerun</en></title>
+	  <default>120</default>
+	  <type>1</type>
+	 </var>
+	</element>
+	<element> <var> <name>suftime</name>
+	  <title><de>Nachlauf</de><en>Trail</en></title>
+	  <default>600</default>
+	  <type>1</type>
+	 </var>
+	</element>
+	<element> <var> <name>priority</name>
+	  <title><de>Priorität</de><en>Priority</en></title>
+	  <default>60</default>
+	  <type>1</type>
+	 </var>
+	</element>
+	<element> <var> <name>lifetime</name>
+	  <title><de>Lebensdauer</de><en>Lifetime</en></title>
+	  <default>99</default>
+	  <type>1</type>
+	 </var>
+	</element>
+	<element> <var> <name>stddir</name>
+	  <title><de>Standard Verz.</de><en>Default dir.</en></title>
+	  <default>iVDR~</default>
+	 </var>
+	</element>
+   </group>
+  </element>
+  
+  <element> <group> <name>timerset</name>
+  <title><de>Aufzeichnungsliste</de><en>Recordinglist</en></title>
+	  <element> <var> <name>predefinedorder</name>
+		<title><de>Reihenfolge</de><en>Order</en></title>
+		<type>3</type>
+		<setname>ord</setname>
+		<default>0</default>
+	   </var>
+	  </element>
+	  <element> <var> <name>predefinedsort</name>
+		<title><de>Sortieren</de><en>Sort</en></title>
+		<type>3</type>
+		<setname>sort</setname>
+		<default>0</default>
+	   </var>
+	  </element>
+   </group>
+  </element>
+
+  <element> <var> <name>predefineddirs</name> <multiple>1</multiple>
+    <descr>
+		<de>Vordefinierte Standartverzeichnisse.\nWerden bei Erstellung von Timern und verschieben von Aufzeichnungen zusätzlich zur Auswahl angeboten.\nUnterverzeichnisse mit \"~\" trennen</de>
+		<en>Predefined Defaultdirectories.\n Will be offered at creation of timers and move records in addition to selection.\nSplit Subdirectories with \"~\"</en>
+	</descr>
+	<title><de>vordef. Verz.</de><en>predef. Dir.</en></title>
+   </var>
+  </element>
+  
+
+  <!-- errorcheck
+   <element> <var> <name>asifhasifh</name> <multiple>1</multiple>
+    <descr>Zeiten in Was läuft um!</descr>
+	<title>vordef. Zeiten</title>
+   </var>
+  </element>-->
+
+ </category>
+
+ <category> <name>remote</name> 
+  <title><de>Fernbedienungseinstellungen</de><en>Remote settings</en></title>
+  <descr><de>Diese Einstellungen wirken sich auf den link Remote und die einblendbare Fernbedienung aus.</de><en>This Settings will be used within iVDR-remote control.</en></descr>
+   <element> <var> <name>volumemax</name>
+	<title>Vol. Max.</title>
+	<descr>VDR/VLC 255\nXBMC 100</descr>
+	<type>1</type>
+	<default>255</default>
+	</var>
+   </element>
+   <element> <var> <name>volumemin</name>
+	<title>Vol. Min.</title>
+	<descr><de>Hier kann der Mindestwert der Lautestärkeneinstellung justiert werden.\nStandard 0</de><en>You can adjust the Volume minimum.\nDefault 0.</en></descr>
+	<type>1</type>
+	<default>0</default>
+	</var>
+   </element>
+   <element> <var> <name>remoteimage</name>
+	<title><de>Livebild</de><en>Liveimage</en></title>
+	<type>2</type>
+	<default>1</default>
+	</var>
+   </element>
+
+  <element> <group> <name>userbtn</name>
+	<title><de>Namen der benutzerdefinierten Tasten</de><en>Name of userdefined keys.</en></title>
+	<descr><de>Die definition der Tasten in der Datei keymacros.conf. Nur wirksam in Verbindung mit VDR.</de><en>The definition of the keys defined in keymacros.conf. Only used by VDR.</en></descr>
+   <element> <var> <name>user_1</name>
+    <title>User 1</title>
+	<default>USER1</default>
+	</var>
+   </element>
+   <element> <var> <name>user_2</name>
+    <title>User 2</title>
+	<default>USER2</default>
+	</var>
+   </element>
+   <element> <var> <name>user_3</name>
+    <title>User 3</title>
+	<default>USER3</default>
+	</var>
+   </element>
+   <element> <var> <name>user_4</name>
+    <title>User 4</title>
+	<default>USER4</default>
+	</var>
+   </element>
+   <element> <var> <name>user_5</name>
+    <title>User 5</title>
+	<default>USER5</default>
+	</var>
+   </element>
+   <element> <var> <name>user_6</name>
+    <title>User 6</title>
+	<default>USER6</default>
+	</var>
+   </element>
+   <element> <var> <name>user_7</name>
+    <title>User 7</title>
+	<default>USER7</default>
+	</var>
+   </element>
+   <element> <var> <name>user_8</name>
+    <title>User 8</title>
+	<default>USER8</default>
+	</var>
+   </element>
+   <element> <var> <name>user_9</name>
+    <title>User 9</title>
+	<default>USER9</default>
+	</var>
+   </element>
+   </group>
+  </element>
+ </category>
+
+ <category> <name>directories</name>
+ <title><de>Verzeichniseinstellungen</de><en>Directorysettings</en></title>
+
+ <element> <group> <name>directorycorrectiongroup</name>
+  <title><de>Experteneinstellungen</de><en>Expert settings</en></title>
+  <element> <group> <name>directorycorrection</name> <multiple>1</multiple>
+    <descr>
+    	<de>Ist der Medienwiedergaberechner nicht der lokale Rechner hat aber zugriff auf die lokale Datenstruktur. Können hier die Verzeichnisse korrigiert werden.\n z.B.\nlocalhost (Lokales Verzeichnis)=/mnt/media/\n hostrechner (Korrektur)=/mnt/nfs/hostrechner/ od. X:/</de>
+		<en>If Mediaplayer is not on localhost but has acces on local files, you have to correct the directories pointed on the clienthost.\n Example:\nlocal=/mnt/media/\ncorrection=/mnt/nfs/hostname/ or X:/</en>
+    </descr>
+    <title><de>Verzeichnisnamenkorrektur</de><en>Foldername correction</en></title>
+	<element> <var> <name>serverdir</name>
+	<title><de>Lokales Verz.</de><en>Local dir.</en></title>
+    <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+	</var>
+	</element>
+	<element> <var> <name>clientdir</name>
+	<title><de>Korrektur</de><en>Correction</en></title>
+	</var>
+	</element>
+   </group>
+  </element>
+  </group>
+  </element>
+
+ <element> <group> <name>media_music_group</name>
+  <title><de>Musik</de><en>Music</en></title>
+  <element> <var> <name>media_music_on</name> <title><de>Aktiviert?</de><en>Enabled?</en></title> <type>2</type> <default>0</default></var> </element>
+  <element> <group> <name>media_music</name> <multiple>1</multiple>
+	<title><de>Musikverzeichnisse</de><en>Musicfolders</en></title>
+	<descr><de>Mehrere Dateieendungen mit | trennen!</de><en>Seperate file extentions with |.</en></descr>
+	<element> <var> <name>media_music_dir</name>
+	<title><de>Pfad</de><en>Path</en></title>
+	<required>media_music_on</required>
+        <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+	</var>
+	</element>
+	<element> <var> <name>media_music_rek</name>
+	<title><de>Rekursiv</de><en>Recursiv</en></title>
+	<type>2</type>
+	<default>1</default>
+	</var>
+	</element>
+	<element> <var> <name>media_music_pat</name>
+	<title><de>Dateieendungen</de><en>File extentions</en></title>
+	<required>1</required>
+	<default>mp3</default>
+	</var>
+	</element>
+   </group>
+  </element>
+   </group>
+  </element>
+
+ <element> <group> <name>media_video_group</name>
+  <title>Video</title>
+  <element> <var> <name>media_video_on</name> <title><de>Aktiviert?</de><en>Enabled?</en></title> <type>2</type> <default>0</default> </var> </element>
+  <element> <group> <name>media_video_group</name> <multiple>1</multiple>
+	<title><de>Videoverzeichnisse</de><en>Videofolders</en></title>
+	<descr><de>Mehrere Dateieendungen mit | trennen!</de><en>Seperate file extentions with |.</en></descr>
+	<element> <var> <name>media_video_dir</name>
+	<title><de>Pfad</de><en>Path</en></title>
+	<required>media_video_on</required>
+        <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+	</var>
+	</element>
+	<element> <var> <name>media_video_rek</name>
+	<title><de>Rekursiv</de><en>Recursiv</en></title>
+	<type>2</type>
+	</var>
+	</element>
+	<element> <var> <name>media_video_pat</name>
+	<title><de>Dateieendungen</de><en>File extentions</en></title>
+	<required>1</required>
+	<default>3gp{1,2}|mp[g4v]|mpeg|ogg|wmv|avi|iso|mp3|mov|mkv|m4v</default>
+	</var>
+	</element>
+   </group>
+  </element>
+   </group>
+  </element>
+
+ <element> <group> <name>media_radio</name>
+  <title>Radio</title>
+  <element> <var> <name>media_radio_on</name> <title><de>Aktiviert?</de><en>Enabled?</en></title> <type>2</type> <default>0</default> </var> </element>
+  <element> <group> <name>media_radio</name> <multiple>1</multiple>
+	<title><de>Radioverzeichnisse</de><en>Radiofolders</en></title>
+	<descr><de>Mehrere Dateieendungen mit | trennen!</de><en>Seperate file extentions with |.</en></descr>
+	<element> <var> <name>media_radio_dir</name>
+	<title><de>Pfad</de><en>Path</en></title>
+	<required>media_radio_on</required>
+        <attrib><value>d</value><text>Directory does not exist!</text></attrib>	
+	</var>
+	</element>
+	<element> <var> <name>media_radio_rek</name>
+	<title><de>Rekursiv</de><en>Recursiv</en></title>
+	<type>2</type>
+	</var>
+	</element>
+	<element> <var> <name>media_radio_pat</name>
+	<title><de>Dateieendungen</de><en>File extentions</en></title>
+	<required>1</required>
+	<default>pls|m3u</default>
+	</var>
+	</element>
+   </group>
+  </element>
+   </group>
+  </element>
+
+  </category>
+ 
+ <category> <name>stream</name>
+  <title><de>Streamingeinstellungen</de><en>Streamingsettings</en></title>
+   <element> <var> <name>stream</name>
+    <title><de>Aktiviert?</de><en>Enabled?</en></title>
+    <default>0</default>
+	<type>2</type>
+   </var>
+  </element>
+  <element> <var> <name>ffmpeg</name>
+   <title>ffmpeg</title>
+   <descr><de>Standort des Programmes ffmpeg</de><en>Location of the programm ffmpeg</en></descr>
+   <default>/usr/bin/ffmpeg</default>
+    <attrib><value>x</value><text>ffmpeg does not exist or is not executable!</text></attrib>	
+   <required>stream</required>
+   </var>
+  </element>
+  <element> <var> <name>ffmpeglib</name>
+   <title>ffmpeg libs</title>
+   <descr><de>Standort der ffmpeg Libraries. Wenn notwendig.</de><en>Location of the ffmpeg Libraries. If necessary.</en></descr>
+   <attrib><value>d</value><text>Librarydir does not exist!</text></attrib>	
+   </var>
+  </element>  <element> <var> <name>seg</name>
+    <title>segmenter</title>
+    <default>/usr/bin/segmenter</default>
+    <attrib><value>x</value><text>segmenter does not exist or is not executable!</text></attrib>	
+    <required>stream</required>
+   </var>
+  </element>
+  <element> <var> <name>localdir</name>
+    <title><de>Arbeitsverzeichnis</de><en>Workingdirectory</en></title>
+	<descr><de>Verzeichnis in dem der stream abgelegt wird. z.B. /dev/shm/ram</de><en>Directory will be used for streamfiles. Example: /dev/shm/ram</en></descr>
+	<attrib><value>w</value><text>Directory streamworking does not exist or is not writeable!</text></attrib>	
+    <default>/tmp/</default>
+	<required>stream</required>
+   </var>
+  </element>
+  <element> <var> <name>wwwdir</name>
+    <title>URL</title>
+	<descr><de>URL zum Arbeitsverzeichnis.</de><en>URL to Workingdirectory</en></descr>
+	<required>stream</required>
+   </var>
+  </element>
+  <element> <var> <name>exportdir</name>
+    <title><de>Exportverzeichnis</de><en>Export directory</en></title>
+    <descr><de>Verzeichnis zum abspeichern eines streams.</de><en>Directory to save streams.</en></descr>
+    <default>/var/lib/video/export</default>
+	<attrib><value>w</value><text>Directory does not exist or is not writeable!</text></attrib>	
+	<switch>1</switch>
+   </var>
+  </element>
+  <element> <group> <name>streams</name> <multiple>1</multiple>
+   <title><de>Streamarten</de><en>Streamtypes</en></title>
+   <element> <var> <name>stream_nm</name>
+    <title>Name</title>
+    <required>stream</required>
+	</var>
+   </element>
+   <element> <var> <name>stream_vb</name>
+    <title>Videobitrate</title>
+	<type>3</type>
+	<setname>videobitrate</setname>
+	</var>
+   </element>
+   <element> <var> <name>stream_ab</name>
+    <title>Audiobitrate</title>
+	<type>3</type>
+	<setname>audiobitrate</setname>
+	</var>
+   </element>
+   <element> <var> <name>stream_res</name>
+    <title><de>Auflösung</de><en>Resolution</en></title>
+	<type>3</type>
+	<setname>resolution</setname>
+	</var>
+   </element>
+  </group>
+  </element>
+ </category>
+
+ <!-- SET DEFINITION --> 
+ 
+ <set> <name>player</name>
+  <item>
+   <value>mplayer</value>
+   <text>Mplayer</text>
+   <descr>Medienwiedergabe über Mplayer</descr>
+  </item>
+  <item>
+   <value>xineliboutput</value>
+   <text>XineLibOutput</text>
+   <descr>Medienwiedergabe über xineliboutput-plugin</descr>
+  </item>
+  <item>
+   <value>xbmc</value>
+   <text>XBMC</text>
+   <descr>Medienwiedergabe über XBMC</descr>
+  </item>
+  <item>
+   <value>vlc</value>
+   <text>VLC</text>
+   <descr>Medienwiedergabe über VLC-Player</descr>
+  </item>
+  <item>
+   <value>xinemediaplayer</value>
+   <text>XineMediaPlayer</text>
+   <descr>Videowiedergabe über XineMediaPlayer. Audiowiedergabe über mp3-Plugin</descr>
+  </item>
+ </set>
+
+ <set> <name>fps</name>
+  <item>
+   <value>25</value>
+   <text>PAL / 25</text>
+  </item>
+  <item>
+   <value>29.997</value>
+   <text>NTSC / 29.97</text>
+  </item>
+ </set>
+
+  <set> <name>ord</name>
+  <item>
+   <value>0</value>
+   <text>&#8986;</text>
+  </item>
+  <item>
+   <value>1</value>
+   <text>abc</text>
+  </item>
+  <item>
+   <value>2</value>
+   <text>&#8987;</text>
+  </item>
+ </set>
+  <set> <name>sort</name>
+  <item>
+   <value>0</value>
+   <text>&#9652;</text>
+  </item>
+  <item>
+   <value>1</value>
+   <text>&#9662;</text>
+  </item>
+ </set>
+ 
+<set> <name>resolution</name>
+ <item><value>144x96</value><text>144x96 3/2 (iPhone)</text></item>
+ <item><value>180x120</value><text>180x120 3/2 (iPhone)</text></item>
+ <item><value>216x144</value><text>216x144 3/2 (iPhone)</text></item>
+ <item><value>240x160</value><text>240x160 3/2 (iPhone)</text></item>
+ <item><value>300x200</value><text>300x200 3/2 (iPhone)</text></item>
+ <item><value>360x240</value><text>360x240 3/2 (iPhone)</text></item>
+ <item><value>408x272</value><text>408x272 3/2 (iPhone)</text></item>
+ <item><value>480x320</value><text>480x320 3/2 (iPhone)</text></item>
+ <item><value>576x384</value><text>576x384 3/2 (iPhone)</text></item>
+ <item><value>720x480</value><text>720x480 3/2 (iPhone)</text></item>
+ <item><value>864x576</value><text>864x576 3/2 (iPhone)</text></item>
+ <item><value>900x600</value><text>900x600 3/2 (iPhone)</text></item>
+ <item><value>960x640</value><text>960x640 3/2 (iPhone)</text></item>
+ <item><value>1152x768</value><text>1152x768 3/2 (iPhone)</text></item> 
+
+ <item><value>128x96</value><text>128x96 4/3 (iPad)</text></item>
+ <item><value>160x120</value><text>160x120 4/3 (iPad)</text></item>
+ <item><value>240x180</value><text>240x180 4/3 (iPad)</text></item>
+ <item><value>320x240</value><text>320x240 4/3 (iPad)</text></item>
+ <item><value>480x360</value><text>480x360 4/3 (iPad)</text></item>
+ <item><value>640x480</value><text>640x480 4/3 (iPad)</text></item>
+ <item><value>800x600</value><text>800x600 4/3 (iPad)</text></item>
+ <item><value>1024x768</value><text>1024x768 4/3 (iPad)</text></item>
+
+ <item><value>128x96</value><text>128x96 (sqcif)</text></item>
+ <item><value>160x120</value><text>160x120 (qqvga)</text></item>
+ <item><value>176x144</value><text>176x144 (qcif)</text></item>
+ <item><value>320x200</value><text>320x200 (cga)</text></item>
+ <item><value>320x240</value><text>320x240 (qvga)</text></item>
+ <item><value>352x288</value><text>352x288 (cif)</text></item>
+ <item><value>640x350</value><text>640x350 (ega)</text></item>
+ <item><value>640x480</value><text>640x480 (vga)</text></item>
+ <item><value>852x480</value><text>852x480 (hd480)</text></item>
+ <item><value>704x576</value><text>704x576 (4cif)</text></item>
+ <item><value>800x600</value><text>800x600 (svga)</text></item>
+ <item><value>1280x720</value><text>1280x720 (hd720)</text></item>
+ <item><value>1024x768</value><text>1024x768 (xga)</text></item>
+ <item><value>1366x768</value><text>1366x768 (wxga)</text></item>
+ <item><value>1280x1024</value><text>1280x1024 (sxga)</text></item>
+ <item><value>1600x1024</value><text>1600x1024 (wsxga)</text></item>
+ <item><value>1920x1080</value><text>1920x1080 (hd1080)</text></item>
+ <item><value>1408x1152</value><text>1408x1152 (16cif)</text></item>
+ <item><value>1600x1200</value><text>1600x1200 (uxga)</text></item>
+</set>
+<set> <name>videobitrate</name>
+ <item><value>128k</value><text>128 kpbs (worst)</text></item>
+ <item><value>256k</value><text>256 kpbs</text></item>
+ <item><value>384k</value><text>384 kpbs</text></item>
+ <item><value>512k</value><text>512 kpbs</text></item>
+ <item><value>768k</value><text>768 kpbs</text></item>
+ <item><value>1024k</value><text>1024 kpbs</text></item>
+ <item><value>1152k</value><text>1152 kpbs</text></item>
+ <item><value>1536k</value><text>1536 kpbs</text></item>
+ <item><value>2048k</value><text>2048 kpbs</text></item>
+ <item><value>3072k</value><text>3072 kpbs</text></item>
+ <item><value>4096k</value><text>4096 kpbs (best)</text></item>
+</set>
+<set> <name>audiobitrate</name>
+ <item><value>160k</value><text>160 kbps (best)</text></item>
+ <item><value>144k</value><text>144 kbps</text></item>
+ <item><value>128k</value><text>128 kbps (good)</text></item>
+ <item><value>112k</value><text>112 kbps</text></item>
+ <item><value>96k</value><text>96 kbps</text></item>
+ <item><value>80k</value><text>80 kbps</text></item>
+ <item><value>64k</value><text>64 kbps</text></item>
+ <item><value>56k</value><text>56 kbps</text></item>
+ <item><value>48k</value><text>48 kbps</text></item>
+ <item><value>40k</value><text>40 kbps</text></item>
+ <item><value>32k</value><text>32 kbps</text></item>
+ <item><value>24k</value><text>24 kbps</text></item>
+ <item><value>16k</value><text>16 kbps</text></item>
+ <item><value>8k</value><text>8 kbps (worst)</text></item>
+</set>
+ 
+<set> <name>language</name>
+ <item><value>en</value><text>English</text></item>
+ <item><value>de</value><text>Deutsch</text></item>
+</set>
+<set> <name>timeformat</name>
+ <item><value>24</value><text>24 hours</text></item>
+ <item><value>12</value><text>12 hours</text></item>
+</set>
+
+<set> <name>targets</name>
+ <item><value>_changewindow</value><text>iVDR _blank</text></item>
+ <item><value>_iui</value><text>iVDR Menu</text></item>
+ <item><value>_blank</value><text>New _blank</text></item>
+ <item><value>_js</value><text>javascript</text></item>
+ <item><value>_replace</value><text>replace DIV</text></item>
+</set>
+
+ </config>
+</db>
